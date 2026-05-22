@@ -1,562 +1,74 @@
 <!DOCTYPE html>
+<!--
+  Arborescence attendue :
+  Devoirs/
+  └── Poster-html/
+      ├── affiche.html   ← ce fichier
+      └── images/
+          └── portrait.jpg
+-->
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiche de révision – Physique-Chimie C11 & C12</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
-
-  :root {
-    --teal: #0F6E56;
-    --teal-mid: #1D9E75;
-    --teal-light: #E1F5EE;
-    --amber: #9A5F0F;
-    --amber-light: #FDF3DC;
-    --blue: #185FA5;
-    --blue-light: #DCE9F9;
-    --purple: #534AB7;
-    --purple-light: #EEEDFE;
-    --dark: #1a1a2e;
-    --gray-light: #F5F4F0;
-    --gray-mid: #D3D1C7;
-    --text: #2C2C2A;
-    --muted: #6B6A65;
-    --white: #ffffff;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--text);
-    background: #f0ede8;
-    padding: 20px;
-  }
-
-  .page {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  }
-
-  /* ── Header ── */
-  .header {
-    background: var(--dark);
-    padding: 28px 36px 24px;
-    text-align: center;
-  }
-  .header h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
-  .header p {
-    font-size: 13px;
-    color: #9FE1CB;
-    font-style: italic;
-  }
-
-  /* ── Layout ── */
-  .content { padding: 28px 36px; }
-
-  /* ── Chapter titles ── */
-  .chap {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin: 28px 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid var(--teal-mid);
-  }
-  .chap:first-child { margin-top: 0; }
-
-  /* ── Section titles ── */
-  .sec {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--dark);
-    margin: 18px 0 8px;
-  }
-
-  /* ── Formula box ── */
-  .formula {
-    background: var(--teal-light);
-    border: 1.5px solid var(--teal-mid);
-    border-radius: 8px;
-    padding: 10px 16px;
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--teal);
-    margin: 8px 0;
-  }
-  .formula.amber {
-    background: var(--amber-light);
-    border-color: var(--amber);
-    color: var(--amber);
-  }
-  .formula.purple {
-    background: var(--purple-light);
-    border-color: var(--purple);
-    color: var(--purple);
-  }
-  .formula.gray {
-    background: var(--gray-light);
-    border-color: var(--gray-mid);
-    color: var(--dark);
-  }
-  .formula.sm { font-size: 13px; padding: 7px 12px; }
-
-  /* ── Alert / info boxes ── */
-  .alert {
-    border-left: 4px solid var(--amber);
-    background: var(--amber-light);
-    border-radius: 0 6px 6px 0;
-    padding: 8px 12px;
-    font-size: 12px;
-    color: var(--amber);
-    margin: 8px 0;
-    font-style: italic;
-  }
-  .info {
-    border-left: 4px solid var(--teal);
-    background: var(--teal-light);
-    border-radius: 0 6px 6px 0;
-    padding: 8px 12px;
-    font-size: 12px;
-    color: var(--teal);
-    margin: 8px 0;
-  }
-  .info-purple {
-    border-left: 4px solid var(--purple);
-    background: var(--purple-light);
-    border-radius: 0 6px 6px 0;
-    padding: 8px 12px;
-    font-size: 12px;
-    color: var(--purple);
-    margin: 8px 0;
-  }
-
-  /* ── Two columns ── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin: 8px 0;
-  }
-  .three-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-    margin: 8px 0;
-  }
-
-  /* ── Cards ── */
-  .card {
-    background: var(--gray-light);
-    border: 1px solid var(--gray-mid);
-    border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .card .label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--teal);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
-  }
-  .card-val {
-    font-size: 12.5px;
-    color: var(--text);
-    line-height: 1.6;
-  }
-
-  /* ── Tables ── */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 8px 0;
-    font-size: 12px;
-  }
-  th {
-    background: var(--teal-mid);
-    color: white;
-    font-weight: 600;
-    padding: 7px 10px;
-    text-align: left;
-    font-size: 11.5px;
-  }
-  td {
-    padding: 6px 10px;
-    border: 1px solid var(--gray-mid);
-    vertical-align: top;
-    line-height: 1.5;
-  }
-  tr:nth-child(even) td { background: var(--gray-light); }
-
-  /* ── Body text ── */
-  p { font-size: 13px; line-height: 1.7; margin: 5px 0; }
-  small { font-size: 11.5px; color: var(--muted); }
-  b { font-weight: 600; }
-
-  /* ── Lists ── */
-  ul { padding-left: 20px; margin: 4px 0; }
-  ul li { font-size: 12.5px; line-height: 1.7; color: var(--text); }
-
-  /* ── Steps ── */
-  .steps { counter-reset: step; margin: 8px 0; }
-  .step {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-  .step-num {
-    min-width: 24px;
-    height: 24px;
-    background: var(--teal-mid);
-    color: white;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .step-text { font-size: 12.5px; line-height: 1.6; }
-
-  /* ── Badge ── */
-  .badge {
-    display: inline-block;
-    font-size: 10.5px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 20px;
-    margin: 0 2px;
-  }
-  .badge-green { background: #d4edda; color: #155724; }
-  .badge-red   { background: #f8d7da; color: #721c24; }
-  .badge-blue  { background: var(--blue-light); color: var(--blue); }
-  .badge-amber { background: var(--amber-light); color: var(--amber); }
-
-  /* ── Footer ── */
-  .footer {
-    background: var(--teal-mid);
-    padding: 14px 36px;
-    text-align: center;
-    font-size: 12px;
-    color: rgba(255,255,255,0.85);
-    font-style: italic;
-  }
-
-  /* ── Divider ── */
-  hr { border: none; border-top: 1px solid var(--gray-mid); margin: 16px 0; }
-
-  @media print {
-    body { background: white; padding: 0; }
-    .page { box-shadow: none; border-radius: 0; max-width: 100%; }
-  }
-.vec {
-    position: relative;
-    display: inline-block;
-    padding-top: 0.2em;
-}
-
-.vec::after {
-    content: "→";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -0.55em;
-    font-size: 0.75em;
-    text-align: center;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Affiche – MARGARET HAMILTON</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="page">
 
-  <!-- HEADER -->
-  <div class="header">
-    <h1>FICHE DE RÉVISION — PHYSIQUE-CHIMIE</h1>
-    <p>C11 · Mouvement d'un système &nbsp;|&nbsp; C12 · Aspects énergétiques des phénomènes mécaniques</p>
-  </div>
+  <div class="affiche">
 
-  <div class="content">
+    <!-- Zone 1 : En-tête -->
+    <header class="entete">
+      <h1>MARGARET HAMILTON</h1>
+      <p>17 août 1936 • Américaine • Informatique, génie logiciel, mathématiques</p>
+    </header>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- C11 — CINÉMATIQUE -->
-    <!-- ═══════════════════════════════════════════ -->
-    <div class="chap">C11 — Mouvement d'un système</div>
+    <!-- Zone 2 : Portrait -->
+    <section class="portrait">
+      <img src="images/Margaret_Hamilton_in_action.jpg" alt="Portrait de MARGARET HAMILTON">
+      <p class="legende">Source : Wikimedia Commons, NASA</p>
+    </section>
 
-    <!-- 1. Vecteur vitesse -->
-    <div class="sec">1. Le vecteur vitesse instantanée</div>
+    <!-- Zone 3 : Biographie -->
+    <section class="biographie">
+      <h2>Biographie</h2>
+      <p>Margaret Hamilton est une informaticienne et mathématicienne américaine née en 1936. Elle travaille au MIT dans les années 1960, où elle dirige l’équipe chargée du logiciel du programme Apollo de la NASA. Elle joue un rôle essentiel dans la réussite de la mission Apollo 11 en développant un système capable de gérer les erreurs en temps réel. Son travail a permis d’éviter un échec lors de l’alunissage. Elle est aussi connue pour avoir popularisé le terme « génie logiciel ». Ses contributions ont profondément influencé la manière de concevoir des logiciels fiables et sécurisés.</p>
+    </section>
 
-    <div class="formula">v<sub>i</sub> = M<sub>i</sub>M<sub>i+1</sub> &divide; (t<sub>i+1</sub> &minus; t<sub>i</sub>)</div>
+    <!-- Zone 4 : Contributions -->
+    <section class="contributions">
+      <h2>Contributions majeures</h2>
+      <ul>
+        <li><strong>Logiciel de l’Apollo Guidance Computer (AGC) :</strong> Conception du système d’exploitation et du logiciel embarqué avec exécution asynchrone et priorisation des tâches, assurant le succès d’Apollo11.</li>
+        <li><strong>Création du concept de "software engineering" :</strong> Introduction d’une discipline méthodologique pour la conception, le test et la gestion de logiciels complexes, posant les bases de l’ingénierie logicielle moderne.</li>
+      </ul>
+    </section>
 
-    <div class="two-col" style="margin-top:10px;">
-      <div>
-        <p><b>Numérateur :</b> distance réelle entre les 2 positions <b>(en m)</b></p>
-        <p><b>Dénominateur :</b> intervalle de temps <b>(en s)</b></p>
-        <div class="alert" style="margin-top:8px;">⚠ Toujours convertir les cm en m avant de calculer !</div>
-      </div>
-      <div class="card">
-        <div class="label">Les 4 caractéristiques de <span class="vec">v</span><sub>i</sub></div>
-        <ul>
-          <li><b>Origine :</b> point M<sub>i</sub></li>
-          <li><b>Direction :</b> tangente à la trajectoire</li>
-          <li><b>Sens :</b> celui du mouvement</li>
-          <li><b>Norme :</b> valeur v<sub>i</sub> (en m/s)</li>
-        </ul>
-      </div>
-    </div>
+    <!-- Zone 5 : Citation -->
+    <blockquote class="citation">
+      <p>«Girls should be encouraged to pursue their dreams and break the stereotypes.»</p>
+      <p>«Il faut encourager les filles à poursuivre leurs rêves et à briser les stéréotypes.»</p>
+      <cite>— Margaret Hamilton</cite>
+    </blockquote>
 
-    <div class="sec" style="margin-top:14px;">Utilisation des échelles</div>
-    <table>
-      <tr><th>Échelle</th><th>Méthode</th><th>Exemple du cours</th></tr>
-      <tr>
-        <td><b>Distances</b></td>
-        <td>Distance réelle = (valeur réf. réelle &times; mesure schéma) &divide; longueur réf. mesurée</td>
-        <td>20 cm réel ↔ 5,2 cm mesuré, segment = 0,45 cm<br>→ 20 &times; 0,45 &divide; 5,2 = 1,7 cm = 0,017 m</td>
-      </tr>
-      <tr>
-        <td><b>Vitesses</b></td>
-        <td>Longueur vecteur = vitesse &divide; valeur de l'échelle</td>
-        <td>v = 0,34 m/s, échelle 1 cm ↔ 0,20 m/s<br>→ vecteur = 0,34 &divide; 0,20 = 1,7 cm</td>
-      </tr>
-    </table>
+    <!-- Zone 6 : Le saviez-vous -->
+    <aside class="anecdote">
+      <h3>Le saviez-vous ?</h3>
+      <p>Margaret Hamilton raconte que sa fille Lauren jouait à l’astronaute en testant ses simulations Apollo. Un jour, elle a fait une erreur que personne n’avait prévue : sélectionner un programme de pré-lancement en plein vol. Margaret a utilisé cet incident pour ajouter une note et améliorer le code de sécurité, ce qui s’est avéré utile dès Apollo 8.</p>
+    </aside>
 
-    <hr>
+    <!-- Zone 7 : Sources -->
+    <footer class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li>Radio France – <a href="https://www.radiofrance.fr/franceculture/margaret-hamilton-la-femme-qui-a-fait-atterrir-l-homme-sur-la-lune-2274004" style="color:#FF0000;" target="_blank" >Article : "Margaret Hamilton, la femme qui a fait atterrir l’Homme sur la Lune"</a></li>
+        <li>Hack The Moon – <a href="https://wehackthemoon.com/people/margaret-hamilton-her-daughters-simulation" style="color:#FF0000;" target="_blank">Article : "In Their Own Words: Margaret Hamilton on Her Daughter's Simulation"</a></li>
+        <li>Wikipedia – <a href="https://fr.wikipedia.org/wiki/Margaret_Hamilton_(scientifique)" style="color:#FF0000;" target="_blank">Margaret Hamilton</a></li>
+      </ul>
+      <p class="realisation">Affiche réalisée par Julia Romanet</p>
+    </footer>
 
-    <!-- 2. Vecteur delta v -->
-    <div class="sec">2. Le vecteur variation de vitesse &Delta;<span class="vec">v</span></div>
-    <div class="formula">&Delta;<span class="vec">v</span><sub>(i&rarr;i+1)</sub> = <span class="vec">v</span><sub>i+1</sub> &minus; <span class="vec">v</span><sub>i</sub></div>
-    <p style="margin-top:6px;">Se trace au point <b>M<sub>i+1</sub></b>. Construction : placer &minus;<span class="vec">v</span><sub>i</sub> à l'extrémité de <span class="vec">v</span><sub>i+1</sub>, puis tracer &Delta;<span class="vec">v</span> de l'origine de <span class="vec">v</span><sub>i+1</sub> jusqu'à l'extrémité de &minus;<span class="vec">v</span><sub>i</sub>.</p>
+  </div> <!-- fin .affiche -->
 
-    <table style="margin-top:10px;">
-      <tr><th>Type de mouvement</th><th>Direction de &Delta;<span class="vec">v</span></th><th>Sens de &Delta;<span class="vec">v</span></th><th>Norme &Delta;v</th></tr>
-      <tr>
-        <td>Rectiligne <b>accéléré</b> (v<sub>3</sub> &gt; v<sub>2</sub>)</td>
-        <td>Trajectoire</td>
-        <td>Sens du mouvement</td>
-        <td>&Delta;v = v<sub>3</sub> &minus; v<sub>2</sub></td>
-      </tr>
-      <tr>
-        <td>Rectiligne <b>décéléré</b> (v<sub>3</sub> &lt; v<sub>2</sub>)</td>
-        <td>Trajectoire</td>
-        <td>Opposé au mouvement</td>
-        <td>&Delta;v = v<sub>2</sub> &minus; v<sub>3</sub></td>
-      </tr>
-      <tr>
-        <td><b>Curviligne</b> ou circulaire</td>
-        <td>À déduire après construction</td>
-        <td>À déduire après construction</td>
-        <td>&Delta;v &ne; v<sub>3</sub> &minus; v<sub>2</sub> <b>(construire !)</b></td>
-      </tr>
-    </table>
-    <div class="info">💡 Lire la valeur de &Delta;v via l'échelle des vitesses : &Delta;v = longueur mesurée &times; valeur de l'échelle.</div>
-
-    <hr>
-
-    <!-- 3. 2e loi Newton -->
-    <div class="chap">2ème loi de Newton — Relation approchée</div>
-
-    <div class="formula">&Sigma;<span class="vec">f</span> = m &times; &Delta;<span class="vec">v</span> &divide; &Delta;t</div>
-
-    <div class="two-col" style="margin-top:10px;">
-      <div>
-        <div class="card">
-          <div class="label">Unités</div>
-          <ul>
-            <li>m : masse en <b>kg</b></li>
-            <li>F : force en <b>N</b></li>
-            <li>&Delta;t : durée en <b>s</b></li>
-            <li>&Delta;v : variation de vitesse en <b>m/s</b></li>
-          </ul>
-        </div>
-        <div class="card" style="margin-top:10px;">
-          <div class="label">Propriétés clés</div>
-          <ul>
-            <li>&Sigma;<span class="vec">f</span> et &Delta;<span class="vec">v</span> ont <b>même direction et même sens</b></li>
-            <li>&Delta;v inversement proportionnel à m</li>
-            <li>Si m double &rarr; &Delta;v divisé par 2</li>
-          </ul>
-        </div>
-      </div>
-      <div>
-        <div class="card" style="background:var(--amber-light); border-color:var(--amber);">
-          <div class="label" style="color:var(--amber);">Chute libre</div>
-          <p style="font-size:12px;">Seule force = poids &rarr; &Sigma;<span class="vec">f</span> = <span class="vec">P</span></p>
-          <div class="formula amber sm" style="margin-top:8px;">&Delta;v = g &times; &Delta;t</div>
-          <ul style="margin-top:8px;">
-            <li>&Delta;<span class="vec">v</span> : vertical, vers le bas</li>
-            <li><b>Indépendant de la masse !</b></li>
-          </ul>
-        </div>
-        <div class="card" style="margin-top:10px; background:var(--gray-light);">
-          <div class="label">1ère loi de Newton</div>
-          <div class="formula gray sm" style="margin-top:6px;">&Sigma;<span class="vec">f</span> = <span class="vec">0</span> &hArr; &Delta;<span class="vec">v</span> = <span class="vec">0</span> &hArr; v = cte</div>
-          <p style="font-size:11.5px; margin-top:6px;">Système <b>immobile</b> ou en mvt <b>rectiligne uniforme</b></p>
-        </div>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- C12 — ÉNERGIE -->
-    <!-- ═══════════════════════════════════════════ -->
-    <div class="chap">C12 — Aspects énergétiques des phénomènes mécaniques</div>
-
-    <!-- 4. Les 3 énergies -->
-    <div class="sec">4. Les trois énergies</div>
-
-    <div class="three-col">
-      <div class="card" style="background:var(--teal-light); border-color:var(--teal);">
-        <div class="label" style="color:var(--teal);">Énergie cinétique</div>
-        <div class="formula sm" style="margin:6px 0;">E<sub>c</sub> = &frac12; &times; m &times; v&sup2;</div>
-        <small>m en kg, v en m/s, E<sub>c</sub> en J<br>Augmente si m ou v &uarr;</small>
-      </div>
-      <div class="card" style="background:var(--blue-light); border-color:var(--blue);">
-        <div class="label" style="color:var(--blue);">Énergie potentielle de pesanteur</div>
-        <div class="formula sm" style="background:var(--blue-light); border-color:var(--blue); color:var(--blue); margin:6px 0;">E<sub>pp</sub> = m &times; g &times; z</div>
-        <small>z = altitude (m), E<sub>pp</sub> = 0 J pour z = 0<br>g = 9,8 N/kg, axe Oz vers le haut</small>
-      </div>
-      <div class="card" style="background:var(--purple-light); border-color:var(--purple);">
-        <div class="label" style="color:var(--purple);">Énergie mécanique</div>
-        <div class="formula sm" style="background:var(--purple-light); border-color:var(--purple); color:var(--purple); margin:6px 0;">E<sub>m</sub> = E<sub>c</sub> + E<sub>pp</sub></div>
-        <small>Se conserve sans frottements<br>Diminue si frottements présents</small>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- 5. Travail -->
-    <div class="sec">5. Travail d'une force</div>
-    <div class="formula">W(<span class="vec">f</span>) = F &times; AB &times; cos &alpha;</div>
-    <p style="margin-top:6px;">&alpha; = angle entre <span class="vec">f</span> et le vecteur déplacement <span class="vec">AB</span></p>
-
-    <table style="margin-top:10px;">
-      <tr><th>Angle &alpha;</th><th>cos &alpha;</th><th>Signe de W</th><th>Type de travail</th></tr>
-      <tr><td>0° &le; &alpha; &lt; 90°</td><td>&gt; 0</td><td><b style="color:green;">W &gt; 0</b></td><td><span class="badge badge-green">Moteur</span> — la force favorise le déplacement</td></tr>
-      <tr><td>&alpha; = 90°</td><td>= 0</td><td><b>W = 0</b></td><td><span class="badge badge-blue">Nul</span> — force perpendiculaire (ex : réaction du support)</td></tr>
-      <tr><td>90° &lt; &alpha; &le; 180°</td><td>&lt; 0</td><td><b style="color:#A32D2D;">W &lt; 0</b></td><td><span class="badge badge-red">Résistant</span> — la force s'oppose au déplacement</td></tr>
-    </table>
-
-    <div class="two-col" style="margin-top:10px;">
-      <div class="card" style="background:var(--teal-light); border-color:var(--teal);">
-        <div class="label" style="color:var(--teal);">Travail du poids <span class="vec">P</span> — force conservative</div>
-        <div class="formula sm" style="margin:6px 0;">W(<span class="vec">P</span>) = m &times; g &times; (z<sub>A</sub> &minus; z<sub>B</sub>)</div>
-        <ul>
-          <li>Ne dépend <b>que des altitudes</b>, pas du chemin</li>
-          <li>Objet descend (z<sub>A</sub> &gt; z<sub>B</sub>) &rarr; <b>W &gt; 0</b> (moteur)</li>
-          <li>Objet monte (z<sub>A</sub> &lt; z<sub>B</sub>) &rarr; <b>W &lt; 0</b> (résistant)</li>
-        </ul>
-      </div>
-      <div class="card" style="background:var(--amber-light); border-color:var(--amber);">
-        <div class="label" style="color:var(--amber);">Travail du frottement <span class="vec">f</span> — force non conservative</div>
-        <div class="formula amber sm" style="margin:6px 0;">W(<span class="vec">f</span>) = &minus;f &times; AB</div>
-        <ul>
-          <li>Dépend <b>du chemin</b> suivi</li>
-          <li>&alpha; = 180° (<span class="vec">f</span> toujours opposé au déplacement)</li>
-          <li>W(<span class="vec">f</span>) toujours <b>négatif</b></li>
-        </ul>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- 6. TEC -->
-    <div class="sec">6. Théorème de l'énergie cinétique (TEC)</div>
-    <div class="formula">&Delta;E<sub>c</sub> = E<sub>c,B</sub> &minus; E<sub>c,A</sub> = &Sigma; W(<span class="vec">f</span>) &nbsp;← TOUTES les forces</div>
-
-    <table style="margin-top:10px;">
-      <tr><th>Force</th><th>Travail</th><th>Pourquoi</th></tr>
-      <tr><td>Réaction <span class="vec">R</span></td><td><b>W(<span class="vec">R</span>) = 0 J</b></td><td><span class="vec">R</span> perpendiculaire au déplacement (&alpha; = 90°)</td></tr>
-      <tr><td>Poids <span class="vec">P</span></td><td><b>W(<span class="vec">P</span>) = m&times;g&times;(z<sub>A</sub>&minus;z<sub>B</sub>)</b></td><td>Force conservative, utiliser la formule du poids</td></tr>
-      <tr><td>Frottement <span class="vec">f</span></td><td><b>W(<span class="vec">f</span>) = &minus;f &times; AB</b></td><td>Force non conservative, toujours résistant</td></tr>
-    </table>
-    <div class="info">📝 Exemple (Tarzan, v<sub>initial</sub> = 0) : &frac12;mv²<sub>final</sub> = m&times;g&times;h &rarr; v<sub>final</sub> = &radic;(2&times;g&times;h)<br>
-    Exemple (toboggan) : &frac12;mv<sub>B</sub>² = m&times;g&times;h &minus; f&times;L &rarr; f = [m&times;g&times;h &minus; &frac12;mv<sub>B</sub>²] &divide; L</div>
-
-    <hr>
-
-    <!-- 7. TVEM -->
-    <div class="sec">7. Théorème de la variation d'énergie mécanique (TVEM)</div>
-    <div class="formula purple">&Delta;E<sub>m</sub> = E<sub>m,B</sub> &minus; E<sub>m,A</sub> = &Sigma; W(<span class="vec">f</span><sub>nc</sub>) &nbsp;← Forces NON CONSERVATIVES seulement</div>
-
-    <div class="two-col" style="margin-top:10px;">
-      <div class="card" style="background:var(--teal-light); border-color:var(--teal);">
-        <div class="label" style="color:var(--teal);">Conservation de E<sub>m</sub></div>
-        <p style="font-size:12px;">Pas de frottements &rarr; &Delta;E<sub>m</sub> = 0</p>
-        <div class="formula sm" style="margin:6px 0;">E<sub>m,B</sub> = E<sub>m,A</sub></div>
-        <small>E<sub>c</sub> + E<sub>pp</sub> = constante<br>Ex : chute libre, montagnes russes sans frottements<br>v = &radic;(2&times;g&times;h)</small>
-      </div>
-      <div class="card" style="background:var(--amber-light); border-color:var(--amber);">
-        <div class="label" style="color:var(--amber);">Non-conservation de E<sub>m</sub></div>
-        <p style="font-size:12px;">Avec frottements &rarr; &Delta;E<sub>m</sub> &lt; 0</p>
-        <div class="formula amber sm" style="margin:6px 0;">&Delta;E<sub>m</sub> = W(<span class="vec">f</span>) &lt; 0</div>
-        <small>E<sub>m</sub> diminue, énergie dissipée en chaleur<br>Ex cycliste : E<sub>m,E</sub>=480 J, E<sub>m,F</sub>=410 J<br>&rarr; W(<span class="vec">f</span>) = &minus;70 J &rarr; f = 7,0 N</small>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- 8. Méthode -->
-    <div class="sec">8. Méthode générale — TEC et TVEM</div>
-
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text"><b>Définir</b> le système étudié et le référentiel terrestre.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text"><b>Bilan des forces :</b> poids <span class="vec">P</span>, réaction <span class="vec">R</span>, frottements <span class="vec">f</span>...</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text"><b>Travaux nuls :</b> W(<span class="vec">R</span>) = 0 si <span class="vec">R</span> &perp; déplacement.</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text"><b>Écrire le théorème</b> avec les notations de l'énoncé (TEC ou TVEM).</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-text"><b>Remplacer</b> chaque travail par son expression littérale.</div></div>
-      <div class="step"><div class="step-num">6</div><div class="step-text"><b>Isoler</b> l'inconnue et faire l'application numérique.</div></div>
-    </div>
-
-    <table style="margin-top:12px;">
-      <tr><th>Je cherche...</th><th>J'utilise...</th></tr>
-      <tr><td>Une vitesse, une force, une distance</td><td><b>TEC</b> — &Delta;E<sub>c</sub> = &Sigma;W (toutes les forces)</td></tr>
-      <tr><td>Le travail des frottements ou &Delta;E<sub>m</sub></td><td><b>TVEM</b> — &Delta;E<sub>m</sub> = &Sigma;W<sub>nc</sub> (forces non conservatives seulement)</td></tr>
-      <tr><td>Chute libre sans frottements</td><td>Les deux &rarr; même résultat : v = &radic;(2&times;g&times;h)</td></tr>
-    </table>
-
-    <hr>
-
-    <!-- Récap final -->
-    <div class="chap">Récapitulatif — Toutes les formules à connaître</div>
-
-    <table>
-      <tr><th>Grandeur</th><th>Formule</th><th>Unité</th><th>À retenir</th></tr>
-      <tr><td><b>Vitesse instantanée</b></td><td>v<sub>i</sub> = M<sub>i</sub>M<sub>i+1</sub> &divide; &Delta;t</td><td>m/s</td><td>&Delta;<span class="vec">v</span> = <span class="vec">v</span><sub>i+1</sub> &minus; <span class="vec">v</span><sub>i</sub></td></tr>
-      <tr><td><b>Énergie cinétique</b></td><td>E<sub>c</sub> = &frac12; &times; m &times; v&sup2;</td><td>J</td><td>Augmente si v ou m augmente</td></tr>
-      <tr><td><b>Énergie pot. pesanteur</b></td><td>E<sub>pp</sub> = m &times; g &times; z</td><td>J</td><td>E<sub>pp</sub> = 0 J pour z = 0 m</td></tr>
-      <tr><td><b>Énergie mécanique</b></td><td>E<sub>m</sub> = E<sub>c</sub> + E<sub>pp</sub></td><td>J</td><td>Se conserve sans frottements</td></tr>
-      <tr><td><b>Travail d'une force</b></td><td>W = F &times; AB &times; cos &alpha;</td><td>J</td><td>&alpha; entre <span class="vec">f</span> et déplacement <span class="vec">AB</span></td></tr>
-      <tr><td><b>Travail du poids</b></td><td>W(<span class="vec">P</span>) = m &times; g &times; (z<sub>A</sub> &minus; z<sub>B</sub>)</td><td>J</td><td>Force conservative</td></tr>
-      <tr><td><b>Travail du frottement</b></td><td>W(<span class="vec">f</span>) = &minus;f &times; AB</td><td>J</td><td>Toujours négatif (résistant)</td></tr>
-      <tr><td><b>2<sup>e</sup> loi de Newton</b></td><td>&Sigma;<span class="vec">f</span> = m &times; &Delta;<span class="vec">v</span> &divide; &Delta;t</td><td>N</td><td>&Sigma;<span class="vec">f</span> et &Delta;<span class="vec">v</span> : même direction, même sens</td></tr>
-      <tr><td><b>TEC</b></td><td>&Delta;E<sub>c</sub> = &Sigma; W(<span class="vec">f</span>)</td><td>J</td><td>TOUTES les forces</td></tr>
-      <tr><td><b>TVEM</b></td><td>&Delta;E<sub>m</sub> = &Sigma; W(<span class="vec">f</span><sub>nc</sub>)</td><td>J</td><td>Forces NON conservatives seulement</td></tr>
-    </table>
-
-  </div><!-- /content -->
-
-  <div class="footer">Bonne révision ! Toutes les formules et méthodes sont tirées directement de ton cours C11/C12 et des exercices corrigés.</div>
-
-</div><!-- /page -->
 </body>
 </html>
