@@ -1,0 +1,135 @@
+/* ── Réinitialisation ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Affiche A3 portrait ── */
+body {
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Style général */
+.affiche {
+  width: 29.7cm;
+  height: 42cm;
+  padding: 1cm;
+  font-family: Arial, sans-serif;
+
+  /* Dégradé spatial */
+  background: linear-gradient(135deg, #0a0f1c, #1c2b4a);
+  color: white;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 0.6cm;
+  border: 3px solid #f1c40f;
+}
+
+/* En-tête */
+.entete {
+    text-align: center;
+    margin-bottom: 1cm;
+}
+
+.entete h1 {
+  font-size: 34pt;
+  letter-spacing: 3px;
+  color: #f1c40f;
+}
+
+.entete p {
+    font-size: 14pt;
+	opacity: 0.85;
+}
+
+/* Corps */
+.corps {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.6cm;
+}
+
+/* Portrait */
+.portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait img {
+  width: 75%;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
+}
+
+.legende {
+  font-size: 10pt;
+  margin-top: 0.2cm;
+  opacity: 0.7;
+}
+
+/* Textes */
+.textes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6cm;
+}
+
+/* Titres */
+h2 {
+  font-size: 18pt;
+  color: #f1c40f;
+  border-left: 5px solid #f1c40f;
+  padding-left: 0.3cm;
+  margin-bottom: 0.3cm;
+}
+
+/* Bas */
+.bas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6cm;
+}
+
+/* Citation */
+.citation {
+  font-style: italic;
+  border-left: 5px solid #f1c40f;
+  padding-left: 0.5cm;
+
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 0.5cm;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2cm;
+}
+
+/* Anecdote */
+.anecdote {
+  background: rgba(241, 196, 15, 0.15);
+  padding: 0.5cm;
+  border-radius: 15px;
+  border: 1px solid #f1c40f;
+}
+
+/* Sources */
+.sources {
+  font-size: 10pt;
+  opacity: 0.8;
+}
+
+
+.contenu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.realisation {
+  font-size:9pt;
+  opacity:0.7;
+  text-align:right;
+}
